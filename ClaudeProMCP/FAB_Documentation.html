@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClaudeProMCP — AI Game Dev Studio Documentation</title>
+<style>
+  :root {
+    --bg:        #0e0e13;
+    --surface:   #13131a;
+    --card:      #1a1a25;
+    --border:    #25253a;
+    --accent:    #2e84e6;
+    --accent2:   #5ba8ff;
+    --green:     #3dba60;
+    --yellow:    #e6c048;
+    --red:       #e05555;
+    --text:      #d8daf0;
+    --muted:     #6e7099;
+    --code-bg:   #111118;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.7; }
+  a { color: var(--accent2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── Top hero ── */
+  .hero {
+    background: linear-gradient(135deg, #0d1928 0%, #0a0f1e 50%, #0d1018 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 60px 40px 50px;
+    text-align: center;
+  }
+  .hero-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; padding: 3px 12px; border-radius: 3px; text-transform: uppercase; margin-bottom: 16px; }
+  .hero h1 { font-size: 2.6rem; font-weight: 800; color: #eef0ff; line-height: 1.2; margin-bottom: 12px; }
+  .hero h1 span { color: var(--accent2); }
+  .hero p { font-size: 1.1rem; color: var(--muted); max-width: 680px; margin: 0 auto 28px; }
+  .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .badge { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 5px 14px; font-size: 12px; color: var(--text); }
+  .badge strong { color: var(--accent2); }
+
+  /* ── Layout ── */
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 30px; }
+  .two-col {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    align-items: start;
+    padding-top: 48px;
+    padding-bottom: 80px;
+  }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── Sidebar nav ── */
+  .sidebar { position: sticky; top: 24px; align-self: start; }
+  .sidebar nav { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+  .sidebar nav h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--muted); margin-bottom: 12px; }
+  .sidebar nav a { display: block; padding: 5px 8px; color: var(--muted); font-size: 13px; border-radius: 4px; transition: background 0.15s, color 0.15s; }
+  .sidebar nav a:hover { background: var(--card); color: var(--text); text-decoration: none; }
+
+  /* ── Content ── */
+  .content { min-width: 0; }          /* prevents grid blowout from wide tables/pre */
+  .content section { margin-bottom: 60px; }
+  .content h2 { font-size: 1.5rem; font-weight: 700; color: #eef0ff; border-left: 3px solid var(--accent); padding-left: 14px; margin-bottom: 20px; scroll-margin-top: 24px; }
+  .content h3 { font-size: 1.05rem; font-weight: 600; color: var(--accent2); margin: 28px 0 10px; }
+  .content p { color: var(--text); margin-bottom: 14px; }
+  .content ul, .content ol { padding-left: 22px; margin-bottom: 14px; }
+  .content li { margin-bottom: 6px; }
+
+
+  /* ── Info boxes ── */
+  .info-box { border-left: 3px solid; border-radius: 0 6px 6px 0; padding: 14px 18px; margin-bottom: 20px; font-size: 14px; }
+  .info-box.tip   { border-color: var(--green);  background: #0d1f14; }
+  .info-box.warn  { border-color: var(--yellow); background: #1a1608; }
+  .info-box.note  { border-color: var(--accent); background: #0d1222; }
+  .info-box strong { display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+  .info-box.tip  strong { color: var(--green); }
+  .info-box.warn strong { color: var(--yellow); }
+  .info-box.note strong { color: var(--accent2); }
+
+  /* ── Code blocks ── */
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 6px; padding: 16px 18px; overflow-x: auto; margin-bottom: 16px; max-width: 100%; }
+  code { font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; font-size: 13px; color: #a8d8ff; }
+  p code, li code { background: var(--code-bg); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; font-size: 12px; color: #a8d8ff; }
+
+  /* ── Tool tables ── */
+  .tool-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 13px; table-layout: fixed; word-break: break-word; }
+  .tool-table th { background: var(--card); color: var(--muted); text-align: left; padding: 8px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid var(--border); }
+  .tool-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .tool-table tr:last-child td { border-bottom: none; }
+  .tool-table tr:hover td { background: var(--card); }
+  .tool-name { color: var(--accent2); font-family: monospace; font-size: 12px; white-space: nowrap; width: 170px; }
+  .tag { display: inline-block; font-size: 10px; padding: 1px 7px; border-radius: 3px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tag.mod  { background: #1a2a14; color: #5dd675; border: 1px solid #2a4a22; }
+  .tag.read { background: #0f1f30; color: #5ba8ff; border: 1px solid #1a3050; }
+  .tag.async { background: #251a08; color: #e6a830; border: 1px solid #3d2e0a; }
+
+  /* ── Feature grid ── */
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .feature-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+  .feature-card .icon { font-size: 1.5rem; margin-bottom: 10px; }
+  .feature-card h4 { font-size: 14px; font-weight: 600; color: #eef0ff; margin-bottom: 6px; }
+  .feature-card p { font-size: 13px; color: var(--muted); margin: 0; }
+
+  /* ── Step list ── */
+  .steps { list-style: none; padding: 0; counter-reset: step; }
+  .steps li { counter-increment: step; display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; }
+  .steps li::before { content: counter(step); min-width: 28px; height: 28px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+  /* ── Tech-details grid ── */
+  .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 24px; font-size: 13px; }
+  .tech-row { display: contents; }
+  .tech-label { background: var(--card); color: var(--muted); font-weight: 600; font-size: 12px; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  .tech-value { background: var(--surface); color: var(--text); padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  .tech-row:last-child .tech-label,
+  .tech-row:last-child .tech-value { border-bottom: none; }
+  .tech-value ul { margin: 0; padding-left: 18px; }
+  .tech-value li { margin-bottom: 3px; }
+  .chip { display: inline-block; background: var(--card); border: 1px solid var(--border); border-radius: 3px; padding: 1px 8px; font-size: 11px; margin: 2px 2px 2px 0; color: var(--text); }
+  .chip.yes  { border-color: #2a4a22; background: #1a2a14; color: #5dd675; }
+  .chip.no   { border-color: #3a2222; background: #2a1414; color: #e07070; }
+  .feat-list { list-style: none; padding: 0; margin: 0; }
+  .feat-list li { padding: 6px 0 6px 20px; border-bottom: 1px solid var(--border); position: relative; color: var(--text); font-size: 13px; }
+  .feat-list li:last-child { border-bottom: none; }
+  .feat-list li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+
+  /* ── Footer ── */
+  footer { background: var(--surface); border-top: 1px solid var(--border); padding: 32px 40px; text-align: center; color: var(--muted); font-size: 13px; }
+  footer a { color: var(--accent2); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════ HERO -->
+<div class="hero">
+  <div class="hero-badge">Plugin Documentation</div>
+  <h1>ClaudeProMCP<br><span>AI Game Dev Studio</span></h1>
+  <p>Chat with Claude inside Unreal Engine 4.27 to build, modify, and manage your project using 53 live MCP editor tools — no scripting required.</p>
+  <div class="badges">
+    <div class="badge"><strong>v1.0.0</strong></div>
+    <div class="badge">UE <strong>4.27</strong></div>
+    <div class="badge">Win64 · Linux · Mac</div>
+    <div class="badge"><strong>53</strong> MCP Tools</div>
+    <div class="badge">Alpha XP · 2026</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ BODY -->
+<div class=" wrap">
+<div class="two-col">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <nav>
+      <h3>Contents</h3>
+      <a href="#fab-description">FAB Description</a>
+      <a href="#technical-details">Technical Details</a>
+      <a href="#overview">Overview</a>
+      <a href="#requirements">Requirements</a>
+      <a href="#installation">Installation</a>
+      <a href="#setup">First-Time Setup</a>
+      <a href="#ui">UI Walkthrough</a>
+      <a href="#tools-actor">Tools — Actor &amp; Level</a>
+      <a href="#tools-scripting">Tools — Scripting</a>
+      <a href="#tools-blueprint">Tools — Blueprint</a>
+      <a href="#tools-asset">Tools — Asset</a>
+      <a href="#tools-animation">Tools — Animation</a>
+      <a href="#tools-character">Tools — Character</a>
+      <a href="#tools-world">Tools — World &amp; Scene</a>
+      <a href="#tools-input">Tools — Input</a>
+      <a href="#tools-audio-mat">Tools — Audio &amp; Material</a>
+      <a href="#tools-data">Tools — Data Assets</a>
+      <a href="#tools-ai">Tools — AI</a>
+      <a href="#tools-sequencer">Tools — Sequencer</a>
+      <a href="#tools-network">Tools — Networking</a>
+      <a href="#tools-tasks">Tools — Task Queue</a>
+      <a href="#mcp-server">MCP Server</a>
+      <a href="#troubleshooting">Troubleshooting</a>
+      <a href="#faq">FAQ</a>
+      <a href="#support">Support</a>
+    </nav>
+  </aside>
+
+  <!-- ── Main content ── -->
+  <main class="content">
+
+    <!-- FAB DESCRIPTION -->
+    <section id="fab-description">
+      <h2>FAB Description</h2>
+      <p><strong>ClaudeProMCP — AI Game Dev Studio</strong> brings the full power of Claude AI directly into your Unreal Engine 4.27 editor as a native docked panel. Describe what you want in plain English and Claude executes it — spawning actors, building Blueprints, setting up lights and cameras, configuring AI behaviour trees, painting foliage, editing materials, managing sequences, and much more — through <strong>53 live MCP editor tools</strong> that act on your project in real time without you ever leaving the editor.</p>
+      <p>Unlike generic AI chat tools, ClaudeProMCP speaks directly to the editor through a local Model Context Protocol (MCP) server running inside the engine process. Claude sees your tool list, chooses the right ones, and chains multiple operations together in a single request. The entire conversation streams token-by-token so you watch the reasoning and results appear live.</p>
+      <p>Whether you are a solo developer who wants to move faster, a team lead delegating repetitive setup work, or a technical artist who needs to iterate quickly on lighting and materials — ClaudeProMCP removes the friction between your idea and the editor state.</p>
+      <div class="info-box note">
+        <strong>Example request</strong>
+        "Build a patrol AI character: create a Blackboard with a PatrolTarget vector key, a Behavior Tree with a Sequence → MoveTo task, and a NavMesh-enabled Character Blueprint with a random patrol component — then rebuild the NavMesh."
+      </div>
+    </section>
+
+    <!-- TECHNICAL DETAILS -->
+    <section id="technical-details">
+      <h2>Technical Details</h2>
+
+      <h3>Features</h3>
+      <ul class="feat-list">
+        <li>In-editor Claude AI chat panel — native Unreal Engine docked tab with streamed NDJSON responses</li>
+        <li>53 live MCP (Model Context Protocol) editor tools — Claude invokes them automatically during conversation</li>
+        <li>Actor spawning, movement, property editing, and deletion via dedicated tools</li>
+        <li>Blueprint query and modify — variables, functions, event graphs, node connections, recompile</li>
+        <li>Animation Blueprint state machine editing — states, transitions, animation asset binding</li>
+        <li>UMG Widget Blueprint tree creation — Canvas Panels, Text Blocks, Buttons, Images, event binding</li>
+        <li>Light placement — Point, Spot, Directional, Rect, Sky Light with intensity, colour, and shadow settings</li>
+        <li>Camera, Decal, and Post Process Volume placement with full parameter control</li>
+        <li>Complete Character Blueprint scaffolding — mesh, movement, spring arm, camera, anim class</li>
+        <li>AI toolset — Blackboard (typed keys), Behavior Tree (Sequence/Selector/Task nodes), NavMesh rebuild</li>
+        <li>Level Sequence creation with actor bindings and transform keyframe tracks</li>
+        <li>Material graph building — expression nodes, parameters, output connections, blending modes</li>
+        <li>Sound Cue graph creation — Modulator, Random, Mixer, Attenuator, Looping nodes</li>
+        <li>DataTable and CurveTable asset creation and row management</li>
+        <li>BlendSpace, AnimMontage, Physics Asset, Control Rig, and IK Setup tools</li>
+        <li>Enhanced Input (IMC + actions) and legacy UInputSettings axis/action mapping</li>
+        <li>Asset search, dependency graph querying, and referencer lookup</li>
+        <li>Python/Blueprint editor script execution with safety permission dialogs</li>
+        <li>Async background task queue — long operations run without blocking the editor, with status polling</li>
+        <li>Session persistence — full chat history saved and restored as JSON</li>
+        <li>Project context injection — source classes, asset types, and level actors summarised automatically</li>
+        <li>Foliage painting and Landscape actor creation</li>
+        <li>Viewport screenshot capture and Output Log querying</li>
+        <li>Configurable API key, model, allowed tools, and permission mode in Settings panel</li>
+        <li>Quick-start prompt templates on the welcome screen — click to send</li>
+      </ul>
+
+      <h3>Code Modules</h3>
+      <div class="tech-grid" style="grid-template-columns: auto 1fr; max-width: 480px;">
+        <div class="tech-label">Module Name</div><div class="tech-value" style="font-weight:600;">ClaudeProMCP</div>
+        <div class="tech-label">Module Type</div><div class="tech-value"><span class="chip">Editor</span></div>
+        <div class="tech-label">Loading Phase</div><div class="tech-value">PostEngineInit</div>
+      </div>
+
+      <h3>Project Statistics</h3>
+      <div class="tech-grid" style="max-width: 600px;">
+        <div class="tech-label">Number of Blueprints</div>
+        <div class="tech-value">0 — pure C++ plugin</div>
+
+        <div class="tech-label">Number of C++ Classes</div>
+        <div class="tech-value">90 <span style="color:var(--muted);font-size:12px;">(94 headers, 81 translation units)</span></div>
+
+        <div class="tech-label">Network Replicated</div>
+        <div class="tech-value"><span class="chip no">No</span> <span style="color:var(--muted);font-size:12px;">Editor-only plugin — no runtime gameplay code</span></div>
+
+        <div class="tech-label">Supported Development Platforms</div>
+        <div class="tech-value">
+          <span class="chip yes">Windows</span>
+          <span class="chip yes">Mac</span>
+          <span class="chip yes">Linux</span>
+        </div>
+
+        <div class="tech-label">Supported Target Build Platforms</div>
+        <div class="tech-value">
+          <span class="chip yes">Win64</span>
+          <span class="chip yes">Mac</span>
+          <span class="chip yes">Linux</span>
+          <br><span style="color:var(--muted);font-size:12px;margin-top:4px;display:block;">Editor-only — no packaged build overhead; the plugin is stripped from shipping builds automatically.</span>
+        </div>
+
+        <div class="tech-label">Documentation</div>
+        <div class="tech-value"><code>Plugins/ClaudeProMCP/FAB_Documentation.html</code><br><a href="https://github.com/Alpha-xp5-ai">github.com/Alpha-xp5-ai</a></div>
+
+        <div class="tech-label">Example Project</div>
+        <div class="tech-value">Contact us on <a href="https://discord.gg/Cgaa9CdtyF">Discord</a> for a sample project download link.</div>
+      </div>
+
+      <h3>Important Notes</h3>
+      <div class="info-box warn">
+        <strong>External Dependencies</strong>
+        This plugin requires <strong>Node.js v18+</strong> and the <strong>Claude CLI</strong> (<code>npm install -g @anthropic-ai/claude-code</code>) installed on the development machine. An <strong>Anthropic API key</strong> is required — enter it once in the plugin Settings panel. Run <code>npm install</code> in <code>Plugins/ClaudeProMCP/Resources/mcp-bridge/</code> before first use.
+      </div>
+      <div class="info-box note">
+        <strong>UE 4.27 Only</strong>
+        This plugin targets Unreal Engine <strong>4.27 exclusively</strong>. It uses <code>FEditorStyle</code>, <code>FTicker</code>, and other UE4-specific APIs that are not present or renamed in UE 5.x.
+      </div>
+      <div class="info-box tip">
+        <strong>No Runtime Overhead</strong>
+        ClaudeProMCP is an Editor module (<code>PostEngineInit</code>, type <code>Editor</code>). It is automatically excluded from packaged/shipping builds and adds zero overhead to the final game.
+      </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section id="overview">
+      <h2>Overview</h2>
+      <p><strong>ClaudeProMCP</strong> embeds a Claude AI chat panel directly inside Unreal Engine 4.27. When you type a request, Claude reasons about what needs to happen and invokes the appropriate MCP tools to carry it out — spawning actors, writing Blueprints, configuring lights, painting foliage, building AI trees, and much more — all without you leaving the editor.</p>
+      <div class="feature-grid">
+        <div class="feature-card"><div class="icon">💬</div><h4>In-Editor Chat</h4><p>Docked Slate panel with streaming responses, session save/load, and history.</p></div>
+        <div class="feature-card"><div class="icon">🔧</div><h4>53 Live Tools</h4><p>MCP tools let Claude directly manipulate editor objects in real time.</p></div>
+        <div class="feature-card"><div class="icon">🧠</div><h4>Project Context</h4><p>Plugin summarises your source classes and assets so Claude understands your project.</p></div>
+        <div class="feature-card"><div class="icon">⚡</div><h4>Streamed Responses</h4><p>Responses stream token-by-token via NDJSON so you see output instantly.</p></div>
+        <div class="feature-card"><div class="icon">📋</div><h4>Script Execution</h4><p>Claude writes and runs Python/Blueprint editor scripts with permission dialogs.</p></div>
+        <div class="feature-card"><div class="icon">🔄</div><h4>Async Task Queue</h4><p>Long operations run in the background; poll status without blocking the editor.</p></div>
+      </div>
+    </section>
+
+    <!-- REQUIREMENTS -->
+    <section id="requirements">
+      <h2>Requirements</h2>
+      <table class="tool-table">
+        <thead><tr><th>Component</th><th>Requirement</th></tr></thead>
+        <tbody>
+          <tr><td>Unreal Engine</td><td>4.27.x (Win64, Linux, Mac)</td></tr>
+          <tr><td>Node.js</td><td>v18.0 or newer — <a href="https://nodejs.org">nodejs.org</a></td></tr>
+          <tr><td>Claude CLI</td><td><code>npm install -g @anthropic-ai/claude-code</code></td></tr>
+          <tr><td>Anthropic API key</td><td>Required — <a href="https://console.anthropic.com">console.anthropic.com</a></td></tr>
+          <tr><td>Visual Studio (Win)</td><td>2019 or 2022 with C++ workload</td></tr>
+          <tr><td>RAM</td><td>16 GB recommended</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- INSTALLATION -->
+    <section id="installation">
+      <h2>Installation</h2>
+      <ol class="steps">
+        <li><strong>Copy plugin folder</strong> — Place the <code>ClaudeProMCP</code> folder inside your project's <code>Plugins/</code> directory (create the directory if it doesn't exist).</li>
+        <li><strong>Install Node dependencies</strong> — Open a terminal in <code>Plugins/ClaudeProMCP/Resources/mcp-bridge/</code> and run:
+          <pre><code>npm install</code></pre>
+        </li>
+        <li><strong>Install Claude CLI</strong> — If not already installed:
+          <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
+        </li>
+        <li><strong>Open the project</strong> — Launch UE 4.27 with your <code>.uproject</code>. The plugin will compile on first open. Click <em>Yes</em> when prompted to rebuild.</li>
+        <li><strong>Enable the plugin</strong> — If not enabled automatically, go to <em>Edit → Plugins → Editor → ClaudeProMCP</em> and enable it, then restart.</li>
+      </ol>
+    </section>
+
+    <!-- FIRST-TIME SETUP -->
+    <section id="setup">
+      <h2>First-Time Setup</h2>
+      <ol class="steps">
+        <li>Open the chat panel via <em>Tools → ClaudeProMCP</em> or press <strong>Ctrl+Shift+C</strong>.</li>
+        <li>Click the <strong>⚙ Settings</strong> button in the toolbar.</li>
+        <li>Enter your <strong>Anthropic API key</strong> in the Account tab. Your key is stored locally in the editor's <code>Saved/</code> folder and never sent anywhere except the Claude CLI.</li>
+        <li>Optionally select a <strong>model</strong> (defaults to Claude Sonnet).</li>
+        <li>Click <strong>Save Settings</strong> and close the Settings panel.</li>
+        <li>Type a prompt such as <em>"List all actors in the current level"</em> and press <strong>▶ Send</strong>. The MCP bridge connects automatically on first send.</li>
+      </ol>
+      <div class="info-box tip">
+        <strong>Tip</strong>
+        The MCP bridge writes a temporary config to <code>Saved/ClaudeProMCP/mcp-config.json</code> each send. If the server is offline or you see "cannot reach UE4 server", make sure the editor is open and the plugin loaded.
+      </div>
+    </section>
+
+    <!-- UI WALKTHROUGH -->
+    <section id="ui">
+      <h2>UI Walkthrough</h2>
+      <h3>Toolbar Row 1 — Header</h3>
+      <p>Shows the plugin title, live MCP status badge (green = connected, yellow = pending, red = error), version badge, and social links.</p>
+      <h3>Toolbar Row 2 — Action Buttons</h3>
+      <table class="tool-table">
+        <thead><tr><th>Button</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>＋ New</td><td>Start a fresh session — clears history and context</td></tr>
+          <tr><td>↺ Restore</td><td>Restore the previous session from disk (enabled when a save exists)</td></tr>
+          <tr><td>💾 Save</td><td>Save chat history to a JSON file</td></tr>
+          <tr><td>📂 Load</td><td>Load a previously saved chat history</td></tr>
+          <tr><td>⟳ Refresh</td><td>Re-scan source files, classes, and level actors for project context</td></tr>
+          <tr><td>🗑 Clear</td><td>Clear the chat display without ending the session</td></tr>
+          <tr><td>⎘ Copy</td><td>Copy the last AI response to clipboard</td></tr>
+          <tr><td>🔌 MCP Status</td><td>Open <code>http://localhost:3000/mcp/status</code> in browser</td></tr>
+          <tr><td>📋 Tool Schemas</td><td>Open <code>http://localhost:3000/mcp/tools</code> in browser</td></tr>
+          <tr><td>⚙ Settings</td><td>Open the Settings panel</td></tr>
+        </tbody>
+      </table>
+      <h3>Input Area</h3>
+      <p>The <strong>Focus:</strong> field (optional) lets you specify a target for the prompt, e.g. <code>BP_PlayerController</code>, <code>/Game/Blueprints/</code>, or <code>MyActor.h</code>. This is prepended to the prompt so Claude knows what asset to focus on.</p>
+      <p>The main text area accepts multi-line prompts. Press <strong>▶ Send</strong> (or <strong>Ctrl+Enter</strong>) to send. While waiting, the button changes to <strong>✕ Cancel</strong> to abort the current request.</p>
+      <h3>Welcome Card &amp; Quick-Start Prompts</h3>
+      <p>On first open (empty history), the welcome card displays quick-start example prompts. Click any prompt to send it immediately.</p>
+    </section>
+
+    <!-- TOOLS: ACTOR & LEVEL -->
+    <section id="tools-actor">
+      <h2>Tools — Actor &amp; Level Editing</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">spawn_actor</td><td>Spawn any UClass actor at a world location and rotation. Supports label and collision handling override.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">get_level_actors</td><td>Query actors in the current level. Filter by class, label substring, or tag. Returns name, label, class, location, rotation.</td><td><span class="tag read">Read-only</span></td></tr>
+          <tr><td class="tool-name">delete_actors</td><td>Delete actors from the level by name or label array. Marks world dirty.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">move_actor</td><td>Set an actor's absolute or relative location, rotation, and scale by label.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">set_property</td><td>Set any UPROPERTY-reflected property on an actor or component. Supports nested property paths like <code>RootComponent.RelativeLocation.X</code>.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">open_level</td><td>Load a level by package path (e.g. <code>/Game/Maps/MainLevel</code>). Supports additive loading.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">level</td><td>Create new levels, duplicate existing ones, rename, or delete level packages.</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOOLS: SCRIPTING -->
+    <section id="tools-scripting">
+      <h2>Tools — Scripting &amp; Console</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">run_console_command</td><td>Execute any editor or runtime console command, e.g. <code>stat fps</code>, <code>r.SetRes 1920x1080</code>.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">execute_script</td><td>Write and run a Python or Blueprint editor utility script. Shows a permission dialog before execution. Runs asynchronously via the task queue.</td><td><span class="tag async">Async</span></td></tr>
+          <tr><td class="tool-name">cleanup_scripts</td><td>Delete temporary scripts generated by <code>execute_script</code> from the Saved directory.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">get_script_history</td><td>List recently executed scripts: path, timestamp, and outcome.</td><td><span class="tag read">Read-only</span></td></tr>
+          <tr><td class="tool-name">get_output_log</td><td>Retrieve the last N lines from the editor Output Log. Useful for diagnosing errors after other tool calls.</td><td><span class="tag read">Read-only</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOOLS: BLUEPRINT -->
+    <section id="tools-blueprint">
+      <h2>Tools — Blueprint</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">blueprint_query</td><td>Read a Blueprint's variables, functions, components, and event graph nodes. Returns a structured summary.</td><td><span class="tag read">Read-only</span></td></tr>
+          <tr><td class="tool-name">blueprint_modify</td><td>Add or edit Blueprint variables, functions, event graph nodes, and wire connections. Recompiles the Blueprint on success.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">anim_blueprint_modify</td><td>Create and edit Animation Blueprint state machines: add states, transitions, and set animation asset references.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">widget_blueprint</td><td>Create UMG Widget Blueprints and edit the widget tree: add Canvas Panels, Text Blocks, Buttons, Images, and bind events.</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOOLS: ASSET -->
+    <section id="tools-asset">
+      <h2>Tools — Asset Management</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">asset_search</td><td>Search the content browser by asset class, path prefix, or name substring. Returns package paths.</td><td><span class="tag read">Read-only</span></td></tr>
+          <tr><td class="tool-name">asset_dependencies</td><td>List the assets that a given asset depends on (imports).</td><td><span class="tag read">Read-only</span></td></tr>
+          <tr><td class="tool-name">asset_referencers</td><td>List the assets that reference (are used by) a given asset.</td><td><span class="tag read">Read-only</span></td></tr>
+          <tr><td class="tool-name">asset</td><td>Create new assets, duplicate, rename, move, or delete content browser packages.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">file_system</td><td>Read text files, write text files, list directories, and check file existence within the project.</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOOLS: ANIMATION -->
+    <section id="tools-animation">
+      <h2>Tools — Animation</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">blend_space</td><td>Create BlendSpace1D or BlendSpace assets, set axis parameters, and add animation samples at (x, y) positions.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">anim_montage</td><td>Create an AnimMontage from an AnimSequence, add slots, and insert AnimNotify events.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">morph_target</td><td>Read available morph target names and current weights from a Skeletal Mesh Component, or set weights.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">ik_setup</td><td>Configure IK chains on a Skeletal Mesh: set end effectors, poles, and IK solver parameters.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">control_rig</td><td>Create Control Rig assets, add controls, and wire up forward-solve nodes in the rig graph.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">physics_asset</td><td>Create Physics Asset bodies and constraints for a Skeletal Mesh. Set collision geometry types and constraint limits.</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOOLS: CHARACTER -->
+    <section id="tools-character">
+      <h2>Tools — Character</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">character</td><td>Scaffold a complete Character Blueprint: Skeletal Mesh, Capsule, CharacterMovement, SpringArm, Camera. Sets anim class and input bindings.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">character_data</td><td>Read and write character stats: max walk speed, jump velocity, max health, crouch speed, and custom float properties.</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOOLS: WORLD & SCENE -->
+    <section id="tools-world">
+      <h2>Tools — World &amp; Scene Editing</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">place_light</td><td>Spawn a light actor. <strong>type:</strong> <code>point</code> | <code>spot</code> | <code>directional</code> | <code>rect</code> | <code>sky</code>. Params: location, rotation, intensity, color {r,g,b}, attenuation_radius, cast_shadows. Spot extras: inner/outer cone angles. Rect extras: source_width/height.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">place_camera</td><td>Spawn a CameraActor. Set FOV, aspect ratio, auto-activate for player, and enable Look At constraint.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">place_decal</td><td>Spawn a DecalActor. Set material, decal size, sort order, and fade screen size.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">set_world_settings</td><td>Edit AWorldSettings: gravity Z, global time dilation, default physics volume settings, kill Z, and the default game mode.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">add_post_process_volume</td><td>Create a Post Process Volume: bloom intensity/threshold, depth of field focal distance/aperture, auto exposure, colour grading (temperature, tint, saturation), vignette intensity, and unbound toggle.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">foliage_paint</td><td>Paint foliage instances from a FoliageType asset into the level. Set count, radius, and ground slope constraints.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">landscape_create</td><td>Create a Landscape actor with configurable section count, section size, and material assignment.</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="info-box note">
+        <strong>Example — Spawn a warm point light</strong>
+        Claude will call <code>place_light</code> with <code>type=point</code>, <code>intensity=5000</code>, and <code>color={r:1, g:0.5, b:0.1}</code> when you ask: <em>"Spawn a point light at the center of the level with warm orange color and intensity 5000."</em>
+      </div>
+    </section>
+
+    <!-- TOOLS: INPUT -->
+    <section id="tools-input">
+      <h2>Tools — Input</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">enhanced_input</td><td>Create Enhanced Input actions and Input Mapping Context assets. Add key mappings with modifiers and triggers.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">input_mappings</td><td>Read and write legacy UInputSettings axis and action mappings (pre-Enhanced Input).</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOOLS: AUDIO & MATERIAL -->
+    <section id="tools-audio-mat">
+      <h2>Tools — Audio &amp; Material</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">material</td><td>Create Material assets or edit existing ones. Add Texture Sample, Constant, Multiply, Lerp, and other expression nodes. Set blending mode, shading model, and connect to output pins.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">sound_cue</td><td>Create Sound Cue assets and build the graph: SoundWave inputs, Modulator, Random, Mixer, Attenuator, and Looping nodes.</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOOLS: DATA -->
+    <section id="tools-data">
+      <h2>Tools — Data Assets</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">data_table</td><td>Create DataTable assets, define UStruct row type, and add/edit/delete rows. Supports CSV-compatible data.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">curve_table</td><td>Create CurveTable assets and add named float curves with key/value pairs.</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOOLS: AI -->
+    <section id="tools-ai">
+      <h2>Tools — AI</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">blackboard</td><td>Create Blackboard assets and add typed keys: Bool, Float, Int, Name, Object, String, Vector.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">behavior_tree</td><td>Create Behavior Tree assets. Add composite nodes (Sequence, Selector), decorator nodes, and Task nodes. Wire the tree hierarchy.</td><td><span class="tag mod">Modifying</span></td></tr>
+          <tr><td class="tool-name">nav_mesh_build</td><td>Trigger a full NavMesh rebuild on the current level and wait for completion.</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOOLS: SEQUENCER -->
+    <section id="tools-sequencer">
+      <h2>Tools — Sequencer</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">level_sequence</td><td>Create Level Sequence assets, add actor bindings, add transform tracks, and set keyframe values at specific frame times.</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOOLS: NETWORKING -->
+    <section id="tools-network">
+      <h2>Tools — Networking</h2>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">replication_settings</td><td>Set replication rules on actor properties and components: <code>Replicated</code>, <code>ReplicatedUsing</code>, net role, and relevancy settings.</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOOLS: TASK QUEUE -->
+    <section id="tools-tasks">
+      <h2>Tools — Async Task Queue</h2>
+      <p>Long operations (e.g., script execution that triggers a compile) use the async task queue to avoid HTTP timeout. Claude submits a task and polls for completion.</p>
+      <table class="tool-table">
+        <thead><tr><th>Tool Name</th><th>Description</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="tool-name">task_submit</td><td>Submit an operation to the background task queue. Returns a task ID.</td><td><span class="tag async">Async</span></td></tr>
+          <tr><td class="tool-name">task_status</td><td>Poll a task by ID: returns <code>pending</code>, <code>running</code>, <code>completed</code>, or <code>failed</code>.</td><td><span class="tag read">Read-only</span></td></tr>
+          <tr><td class="tool-name">task_result</td><td>Retrieve the full result payload of a completed task.</td><td><span class="tag read">Read-only</span></td></tr>
+          <tr><td class="tool-name">task_list</td><td>List all tasks and their statuses.</td><td><span class="tag read">Read-only</span></td></tr>
+          <tr><td class="tool-name">task_cancel</td><td>Cancel a pending or running task by ID.</td><td><span class="tag mod">Modifying</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- MCP SERVER -->
+    <section id="mcp-server">
+      <h2>MCP Server Architecture</h2>
+      <p>The plugin runs a lightweight HTTP server inside the editor process on <code>http://localhost:3000</code>. The Claude CLI connects to it through a Node.js MCP stdio bridge (<code>Resources/mcp-bridge/index.js</code>).</p>
+      <h3>Endpoints</h3>
+      <table class="tool-table">
+        <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>GET</code></td><td><code>/mcp/status</code></td><td>Server status, port, version, tool count</td></tr>
+          <tr><td><code>GET</code></td><td><code>/mcp/tools</code></td><td>Full JSON schema for all registered tools</td></tr>
+          <tr><td><code>POST</code></td><td><code>/mcp/tool/{name}</code></td><td>Execute a tool — body is flat JSON params</td></tr>
+        </tbody>
+      </table>
+      <h3>Bridge Config</h3>
+      <p>On each send, the plugin writes a temporary config to <code>Saved/ClaudeProMCP/mcp-config.json</code> pointing to the bridge at its absolute install path, then passes <code>--mcp-config</code> to the Claude CLI. No manual <code>claude mcp add</code> step is needed.</p>
+      <div class="info-box warn">
+        <strong>Important</strong>
+        The MCP bridge requires <code>node_modules</code> to be installed. If you see "MCP bridge not found" errors, run <code>npm install</code> in <code>Plugins/ClaudeProMCP/Resources/mcp-bridge/</code>.
+      </div>
+    </section>
+
+    <!-- TROUBLESHOOTING -->
+    <section id="troubleshooting">
+      <h2>Troubleshooting</h2>
+
+      <h3>MCP server not connecting / tools not available</h3>
+      <ol>
+        <li>Make sure the UE4 editor is open with the plugin loaded (check the Output Log for <em>"MCP Server started on http://localhost:3000"</em>).</li>
+        <li>Run <code>npm install</code> in <code>Plugins/ClaudeProMCP/Resources/mcp-bridge/</code> if not already done.</li>
+        <li>Visit <code>http://localhost:3000/mcp/status</code> in a browser. If it responds, the server is running.</li>
+        <li>Check <em>Output Log → LogClaudeProMCP</em> for <em>"MCP config written to:"</em> — if missing, the bridge path wasn't found.</li>
+      </ol>
+
+      <h3>Empty responses from Claude</h3>
+      <ol>
+        <li>Verify the Claude CLI is installed: run <code>claude --version</code> in a terminal.</li>
+        <li>Check your API key is set in Settings → Account.</li>
+        <li>Test the CLI directly from the project directory:<br>
+          <pre><code>echo '{"type":"user","message":{"role":"user","content":[{"type":"text","text":"say pong"}]}}' | node "C:/Users/YourName/AppData/Roaming/npm/node_modules/@anthropic-ai/claude-code/cli.js" -p --output-format stream-json --input-format stream-json</code></pre>
+        </li>
+      </ol>
+
+      <h3>Plugin fails to compile after updating</h3>
+      <ol>
+        <li>Fully close the editor (verify no <code>UE4Editor.exe</code> in Task Manager).</li>
+        <li>Delete <code>Plugins/ClaudeProMCP/Binaries/</code> and <code>Plugins/ClaudeProMCP/Intermediate/</code>.</li>
+        <li>Right-click the <code>.uproject</code> → <em>Generate Visual Studio project files</em>, then open and build in Visual Studio.</li>
+      </ol>
+
+      <h3>"Tool not in deferred toollist"</h3>
+      <p>This means the MCP bridge launched but returned zero tools (UE4 server unreachable). Follow the MCP connection steps above.</p>
+
+      <div class="info-box tip">
+        <strong>Log categories to watch</strong>
+        Filter the Output Log by <code>LogClaudeProMCP</code> to see all plugin activity: server start, config writes, tool registrations, and execution results.
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2>FAQ</h2>
+      <h3>Does this work with UE5?</h3>
+      <p>No. This plugin is built and tested for UE 4.27 only. UE5 uses different APIs (<code>FAppStyle</code> vs <code>FEditorStyle</code>, etc.).</p>
+      <h3>Is an internet connection required?</h3>
+      <p>Yes, the Claude CLI makes API calls to Anthropic's servers. Your prompts and project context are sent as part of the API request.</p>
+      <h3>Can I use the free Claude tier?</h3>
+      <p>Yes, but free tier has rate limits. For heavy use, a paid Anthropic plan is recommended.</p>
+      <h3>Where are API keys stored?</h3>
+      <p>API keys are stored in <code>Saved/ClaudeProMCP/settings.json</code> on your local machine. They are never sent anywhere except the Claude CLI process.</p>
+      <h3>Can Claude modify C++ source files?</h3>
+      <p>Claude can read and write files via <code>file_system</code> and run editor scripts via <code>execute_script</code>, but it does not have a native C++ compiler integration. It can write C++ source and suggest you rebuild manually.</p>
+      <h3>How do I add a custom MCP tool?</h3>
+      <p>Derive a class from <code>FMCPToolBase</code>, implement <code>GetInfo()</code> and <code>Execute()</code>, then call <code>RegisterTool(MakeShared&lt;YourTool&gt;())</code> in <code>FMCPToolRegistry::RegisterBuiltinTools()</code>.</p>
+    </section>
+
+    <!-- SUPPORT -->
+    <section id="support">
+      <h2>Support &amp; Community</h2>
+      <div class="feature-grid">
+        <div class="feature-card"><div class="icon">💬</div><h4>Discord</h4><p>Join the community for help, feature requests, and updates.<br><a href="https://discord.gg/Cgaa9CdtyF">discord.gg/Cgaa9CdtyF</a></p></div>
+        <div class="feature-card"><div class="icon"></div><h4>GitHub</h4><p>Report bugs and browse source code.<br><a href="https://github.com/Alpha-xp5-ai">github.com/Alpha-xp5-ai</a></p></div>
+        <div class="feature-card"><div class="icon">▶</div><h4>YouTube</h4><p>Video tutorials and showcase content.<br><a href="https://www.youtube.com/@alpha_xp0">youtube.com/@alpha_xp0</a></p></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+</div>
+
+<footer>
+  <p>ClaudeProMCP v1.0.0 &mdash; Copyright &copy; Alpha XP 2026. All Rights Reserved.</p>
+  <p style="margin-top:8px">
+    <a href="https://discord.gg/Cgaa9CdtyF">Discord</a> &nbsp;&middot;&nbsp;
+    <a href="https://github.com/Alpha-xp5-ai">GitHub</a> &nbsp;&middot;&nbsp;
+    <a href="https://www.youtube.com/@alpha_xp0">YouTube</a>
+  </p>
+</footer>
+
+</body>
+</html>
