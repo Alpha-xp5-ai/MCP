@@ -135,10 +135,10 @@
 <div class="hero">
   <div class="hero-badge">Plugin Documentation</div>
   <h1>ClaudeProMCP<br><span>AI Game Dev Studio</span></h1>
-  <p>Chat with Claude inside Unreal Engine 4.27 to build, modify, and manage your project using 53 live MCP editor tools — no scripting required.</p>
+  <p>Chat with Claude inside Unreal Engine 4.27 – UE 5.0+ to build, modify, and manage your project using 53 live MCP editor tools — no scripting required.</p>
   <div class="badges">
     <div class="badge"><strong>v1.0.0</strong></div>
-    <div class="badge">UE <strong>4.27</strong></div>
+    <div class="badge">UE <strong>4.27 – 5.x</strong></div>
     <div class="badge">Win64 · Linux · Mac</div>
     <div class="badge"><strong>53</strong> MCP Tools</div>
     <div class="badge">Alpha XP · 2026</div>
@@ -187,7 +187,7 @@
     <!-- FAB DESCRIPTION -->
     <section id="fab-description">
       <h2>FAB Description</h2>
-      <p><strong>ClaudeProMCP — AI Game Dev Studio</strong> brings the full power of Claude AI directly into your Unreal Engine 4.27 editor as a native docked panel. Describe what you want in plain English and Claude executes it — spawning actors, building Blueprints, setting up lights and cameras, configuring AI behaviour trees, painting foliage, editing materials, managing sequences, and much more — through <strong>53 live MCP editor tools</strong> that act on your project in real time without you ever leaving the editor.</p>
+      <p><strong>ClaudeProMCP — AI Game Dev Studio</strong> brings the full power of Claude AI directly into your Unreal Engine 4.27 – UE 5.0+ editor as a native docked panel. Describe what you want in plain English and Claude executes it — spawning actors, building Blueprints, setting up lights and cameras, configuring AI behaviour trees, painting foliage, editing materials, managing sequences, and much more — through <strong>53 live MCP editor tools</strong> that act on your project in real time without you ever leaving the editor.</p>
       <p>Unlike generic AI chat tools, ClaudeProMCP speaks directly to the editor through a local Model Context Protocol (MCP) server running inside the engine process. Claude sees your tool list, chooses the right ones, and chains multiple operations together in a single request. The entire conversation streams token-by-token so you watch the reasoning and results appear live.</p>
       <p>Whether you are a solo developer who wants to move faster, a team lead delegating repetitive setup work, or a technical artist who needs to iterate quickly on lighting and materials — ClaudeProMCP removes the friction between your idea and the editor state.</p>
       <div class="info-box note">
@@ -275,8 +275,8 @@
         This plugin requires <strong>Node.js v18+</strong> and the <strong>Claude CLI</strong> (<code>npm install -g @anthropic-ai/claude-code</code>) installed on the development machine. An <strong>Anthropic API key</strong> is required — enter it once in the plugin Settings panel. Run <code>npm install</code> in <code>Plugins/ClaudeProMCP/Resources/mcp-bridge/</code> before first use.
       </div>
       <div class="info-box note">
-        <strong>UE 4.27 Only</strong>
-        This plugin targets Unreal Engine <strong>4.27 exclusively</strong>. It uses <code>FEditorStyle</code>, <code>FTicker</code>, and other UE4-specific APIs that are not present or renamed in UE 5.x.
+        <strong>UE 4.27 – UE 5.0+ Compatible</strong>
+        This plugin supports Unreal Engine <strong>4.27 through UE 5.0+</strong>. The codebase has been updated to use current UE5 APIs (<code>FAppStyle</code>, <code>FTSTicker</code>, <code>FSavePackageArgs</code>, etc.).
       </div>
       <div class="info-box tip">
         <strong>No Runtime Overhead</strong>
@@ -287,7 +287,7 @@
     <!-- OVERVIEW -->
     <section id="overview">
       <h2>Overview</h2>
-      <p><strong>ClaudeProMCP</strong> embeds a Claude AI chat panel directly inside Unreal Engine 4.27. When you type a request, Claude reasons about what needs to happen and invokes the appropriate MCP tools to carry it out — spawning actors, writing Blueprints, configuring lights, painting foliage, building AI trees, and much more — all without you leaving the editor.</p>
+      <p><strong>ClaudeProMCP</strong> embeds a Claude AI chat panel directly inside Unreal Engine 4.27 – UE 5.0+. When you type a request, Claude reasons about what needs to happen and invokes the appropriate MCP tools to carry it out — spawning actors, writing Blueprints, configuring lights, painting foliage, building AI trees, and much more — all without you leaving the editor.</p>
       <div class="feature-grid">
         <div class="feature-card"><div class="icon">💬</div><h4>In-Editor Chat</h4><p>Docked Slate panel with streaming responses, session save/load, and history.</p></div>
         <div class="feature-card"><div class="icon">🔧</div><h4>53 Live Tools</h4><p>MCP tools let Claude directly manipulate editor objects in real time.</p></div>
@@ -304,7 +304,7 @@
       <table class="tool-table">
         <thead><tr><th>Component</th><th>Requirement</th></tr></thead>
         <tbody>
-          <tr><td>Unreal Engine</td><td>4.27.x (Win64, Linux, Mac)</td></tr>
+          <tr><td>Unreal Engine</td><td>4.27 – 5.x (Win64, Linux, Mac)</td></tr>
           <tr><td>Node.js</td><td>v18.0 or newer — <a href="https://nodejs.org">nodejs.org</a></td></tr>
           <tr><td>Claude CLI</td><td><code>npm install -g @anthropic-ai/claude-code</code></td></tr>
           <tr><td>Anthropic API key</td><td>Required — <a href="https://console.anthropic.com">console.anthropic.com</a></td></tr>
@@ -325,7 +325,7 @@
         <li><strong>Install Claude CLI</strong> — If not already installed:
           <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
         </li>
-        <li><strong>Open the project</strong> — Launch UE 4.27 with your <code>.uproject</code>. The plugin will compile on first open. Click <em>Yes</em> when prompted to rebuild.</li>
+        <li><strong>Open the project</strong> — Launch UE 4.27 / UE 5.0+ with your <code>.uproject</code>. The plugin will compile on first open. Click <em>Yes</em> when prompted to rebuild.</li>
         <li><strong>Enable the plugin</strong> — If not enabled automatically, go to <em>Edit → Plugins → Editor → ClaudeProMCP</em> and enable it, then restart.</li>
       </ol>
     </section>
@@ -600,7 +600,7 @@
 
       <h3>MCP server not connecting / tools not available</h3>
       <ol>
-        <li>Make sure the UE4 editor is open with the plugin loaded (check the Output Log for <em>"MCP Server started on http://localhost:3000"</em>).</li>
+        <li>Make sure the Unreal Editor is open with the plugin loaded (check the Output Log for <em>"MCP Server started on http://localhost:3000"</em>).</li>
         <li>Run <code>npm install</code> in <code>Plugins/ClaudeProMCP/Resources/mcp-bridge/</code> if not already done.</li>
         <li>Visit <code>http://localhost:3000/mcp/status</code> in a browser. If it responds, the server is running.</li>
         <li>Check <em>Output Log → LogClaudeProMCP</em> for <em>"MCP config written to:"</em> — if missing, the bridge path wasn't found.</li>
@@ -623,7 +623,7 @@
       </ol>
 
       <h3>"Tool not in deferred toollist"</h3>
-      <p>This means the MCP bridge launched but returned zero tools (UE4 server unreachable). Follow the MCP connection steps above.</p>
+      <p>This means the MCP bridge launched but returned zero tools (Unreal Editor server unreachable). Follow the MCP connection steps above.</p>
 
       <div class="info-box tip">
         <strong>Log categories to watch</strong>
@@ -635,7 +635,7 @@
     <section id="faq">
       <h2>FAQ</h2>
       <h3>Does this work with UE5?</h3>
-      <p>No. This plugin is built and tested for UE 4.27 only. UE5 uses different APIs (<code>FAppStyle</code> vs <code>FEditorStyle</code>, etc.).</p>
+      <p>Yes. This plugin supports UE 4.27 through UE 5.0+. The codebase has been fully updated to the current UE5 API surface (<code>FAppStyle</code>, <code>FTSTicker</code>, <code>FSavePackageArgs</code>, and more).</p>
       <h3>Is an internet connection required?</h3>
       <p>Yes, the Claude CLI makes API calls to Anthropic's servers. Your prompts and project context are sent as part of the API request.</p>
       <h3>Can I use the free Claude tier?</h3>

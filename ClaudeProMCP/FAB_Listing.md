@@ -1,6 +1,6 @@
-# ClaudeProMCP — AI Game Dev Studio for UE 4.27
+# ClaudeProMCP — AI Game Dev Studio for UE 4.27 – UE 5.0+
 
-**Version:** 1.0.0 | **Engine:** UE 4.27 | **Platforms:** Win64, Linux, Mac  
+**Version:** 1.0.0 | **Engine:** UE 4.27 – UE 5.0+ | **Platforms:** Win64, Linux, Mac  
 **Category:** Editor | **Created by:** Alpha XP  
 **Discord:** discord.gg/Cgaa9CdtyF | **GitHub:** github.com/Alpha-xp5-ai | **YouTube:** youtube.com/@alpha_xp0
 
@@ -8,7 +8,7 @@
 
 ## Overview
 
-**ClaudeProMCP** brings a full AI-powered game development assistant into the Unreal Engine 4.27 editor. Chat with Claude directly from a docked panel, issue natural-language requests to create Blueprints, spawn actors, rig characters, build AI behaviour trees, set up foliage, edit materials, manage sequencer tracks, and much more — all through **53 live MCP editor tools** that modify your project in real time without leaving the editor.
+**ClaudeProMCP** brings a full AI-powered game development assistant into the Unreal Engine 4.27 – UE 5.0+ editor. Chat with Claude directly from a docked panel, issue natural-language requests to create Blueprints, spawn actors, rig characters, build AI behaviour trees, set up foliage, edit materials, manage sequencer tracks, and much more — all through **53 live MCP editor tools** that modify your project in real time without leaving the editor.
 
 No copy-pasting, no manual scripting. Just describe what you want, and Claude acts on it.
 
@@ -148,7 +148,7 @@ No copy-pasting, no manual scripting. Just describe what you want, and Claude ac
 
 ## Requirements
 
-- **Unreal Engine:** 4.27 (not UE5)
+- **Unreal Engine:** 4.27 – UE 5.0+
 - **OS:** Windows 10/11 x64, Linux, macOS
 - **Node.js:** v18.0 or newer (for the MCP bridge)
 - **Claude CLI:** `npm install -g @anthropic-ai/claude-code` (free tier supported)
@@ -160,7 +160,7 @@ No copy-pasting, no manual scripting. Just describe what you want, and Claude ac
 ## Quick Setup
 
 1. Copy the `ClaudeProMCP` folder into your project's `Plugins/` directory
-2. Open your project in UE 4.27 — the plugin enables automatically
+2. Open your project in UE 4.27 / UE 5.0+ — the plugin enables automatically
 3. In the plugin Settings panel, enter your **Anthropic API key**
 4. In the MCP bridge folder (`Plugins/ClaudeProMCP/Resources/mcp-bridge/`), run:
    ```
@@ -241,7 +241,7 @@ No copy-pasting, no manual scripting. Just describe what you want, and Claude ac
 - Requires the **Claude CLI**: `npm install -g @anthropic-ai/claude-code`
 - An **Anthropic API key** is required — enter it once in the plugin Settings panel (free tier supported, paid plan recommended for heavy use)
 - Run `npm install` in `Plugins/ClaudeProMCP/Resources/mcp-bridge/` before first use
-- Compatible with **UE 4.27 only** — uses UE4-specific APIs (`FEditorStyle`, `FTicker`, etc.) not present in UE 5.x
+- Compatible with **UE 4.27 – UE 5.0+** — supports both UE4 and UE5 editor APIs
 - Editor module only — adds **zero overhead** to packaged/shipping builds
 
 ---
