@@ -145,6 +145,17 @@
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════════════════ QUICK START BANNER -->
+<div style="background:#0d1f14;border-bottom:1px solid #2a4a22;padding:18px 40px;text-align:center;font-size:13px;color:#d8daf0;">
+  <strong style="color:#3dba60;">⚡ Quick Start:</strong>
+  &nbsp;1. Install Node.js v18+ &nbsp;│&nbsp;
+  2. <code style="background:#111118;padding:2px 6px;border-radius:3px;">npm install -g @anthropic-ai/claude-code</code> &nbsp;│&nbsp;
+  3. <code style="background:#111118;padding:2px 6px;border-radius:3px;">cd Plugins/ClaudeProMCP/Resources/mcp-bridge &amp;&amp; npm install</code> &nbsp;│&nbsp;
+  4. Enter API key in plugin Settings &nbsp;│&nbsp;
+  5. <strong>Tools → ClaudeProMCP</strong>
+  &nbsp;&nbsp;<a href="#installation" style="color:#5ba8ff;margin-left:10px;">Full guide ↓</a>
+</div>
+
 <!-- ══════════════════════════════════════════════════════════ BODY -->
 <div class=" wrap">
 <div class="two-col">
@@ -271,8 +282,19 @@
 
       <h3>Important Notes</h3>
       <div class="info-box warn">
-        <strong>External Dependencies</strong>
-        This plugin requires <strong>Node.js v18+</strong> and the <strong>Claude CLI</strong> (<code>npm install -g @anthropic-ai/claude-code</code>) installed on the development machine. An <strong>Anthropic API key</strong> is required — enter it once in the plugin Settings panel. Run <code>npm install</code> in <code>Plugins/ClaudeProMCP/Resources/mcp-bridge/</code> before first use.
+        <strong>External Dependencies — Required Before First Use</strong>
+        This plugin requires <strong>Node.js v18+</strong> and the <strong>Claude CLI</strong> (<code>npm install -g @anthropic-ai/claude-code</code>) installed on the development machine. An <strong>Anthropic API key</strong> is required — enter it once in the plugin Settings panel.<br><br>
+        <strong>After installing the plugin, run once:</strong><br>
+        <code>cd Plugins/ClaudeProMCP/Resources/mcp-bridge &amp;&amp; npm install</code><br><br>
+        <em>Note: <code>node_modules</code> is not included in the Fab download (Fab policy prohibits executables). This one-time step installs the MCP bridge dependencies.</em>
+      </div>
+      <div class="info-box note">
+        <strong>Optional Plugin Features</strong>
+        Three optional plugins unlock additional tool categories. Enable them in <em>Edit → Plugins</em> if needed:<br>
+        • <strong>EditorScriptingUtilities</strong> — required for <code>asset</code> and <code>file_system</code> tools<br>
+        • <strong>EnhancedInput</strong> — required for <code>enhanced_input</code> tool<br>
+        • <strong>ControlRig</strong> — required for <code>control_rig</code> tool (experimental)<br>
+        All three are optional; the remaining 45 tools work without them.
       </div>
       <div class="info-box note">
         <strong>UE 4.27 – UE 5.0+ Compatible</strong>

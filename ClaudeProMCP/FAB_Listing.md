@@ -242,6 +242,8 @@ No copy-pasting, no manual scripting. Just describe what you want, and Claude ac
 - An **Anthropic API key** is required — enter it once in the plugin Settings panel (free tier supported, paid plan recommended for heavy use)
 - Run `npm install` in `Plugins/ClaudeProMCP/Resources/mcp-bridge/` before first use
 - Compatible with **UE 4.27 – UE 5.0+** — supports both UE4 and UE5 editor APIs
+- `node_modules` is **not included** in the download (Fab policy prohibits executables). Run `npm install` once in `Plugins/ClaudeProMCP/Resources/mcp-bridge/` before first use
+- Optional plugins: **EditorScriptingUtilities**, **EnhancedInput**, **ControlRig** — enable in Edit → Plugins for full tool coverage; all other tools work without them
 - Editor module only — adds **zero overhead** to packaged/shipping builds
 
 ---
