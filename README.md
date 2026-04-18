@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/26839838/README.md)
 <div align="center">
 
 # ClaudeProMCP — AI Game Dev Studio
