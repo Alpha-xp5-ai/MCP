@@ -162,7 +162,7 @@ No copy-pasting, no manual scripting. Just describe what you want, and Claude ac
 1. Copy the `ClaudeProMCP` folder into your project's `Plugins/` directory
 2. Open your project in UE 4.27 / UE 5.0+ — the plugin enables automatically
 3. In the plugin Settings panel, enter your **Anthropic API key**
-4. In the MCP bridge folder (`Plugins/ClaudeProMCP/Resources/mcp-bridge/`), run:
+4. In the MCP bridge folder (`Plugins/ClaudeProMCP/Resources/UE5-Claude-mcp/`), run:
    ```
    npm install
    ```
@@ -240,9 +240,9 @@ No copy-pasting, no manual scripting. Just describe what you want, and Claude ac
 - Requires **Node.js v18+** installed on the development machine — [nodejs.org](https://nodejs.org)
 - Requires the **Claude CLI**: `npm install -g @anthropic-ai/claude-code`
 - An **Anthropic API key** is required — enter it once in the plugin Settings panel (free tier supported, paid plan recommended for heavy use)
-- Run `npm install` in `Plugins/ClaudeProMCP/Resources/mcp-bridge/` before first use
+- Run `npm install` in `Plugins/ClaudeProMCP/Resources/UE5-Claude-mcp/` before first use
 - Compatible with **UE 4.27 – UE 5.0+** — supports both UE4 and UE5 editor APIs
-- `node_modules` is **not included** in the download (Fab policy prohibits executables). Run `npm install` once in `Plugins/ClaudeProMCP/Resources/mcp-bridge/` before first use
+- `node_modules` is **not included** in the download (Fab policy prohibits executables). Run `npm install` once in `Plugins/ClaudeProMCP/Resources/UE5-Claude-mcp/` before first use
 - Optional plugins: **EditorScriptingUtilities**, **EnhancedInput**, **ControlRig** — enable in Edit → Plugins for full tool coverage; all other tools work without them
 - Editor module only — adds **zero overhead** to packaged/shipping builds
 

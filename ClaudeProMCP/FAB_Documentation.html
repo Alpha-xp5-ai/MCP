@@ -150,7 +150,7 @@
   <strong style="color:#3dba60;">⚡ Quick Start:</strong>
   &nbsp;1. Install Node.js v18+ &nbsp;│&nbsp;
   2. <code style="background:#111118;padding:2px 6px;border-radius:3px;">npm install -g @anthropic-ai/claude-code</code> &nbsp;│&nbsp;
-  3. <code style="background:#111118;padding:2px 6px;border-radius:3px;">cd Plugins/ClaudeProMCP/Resources/mcp-bridge &amp;&amp; npm install</code> &nbsp;│&nbsp;
+  3. <code style="background:#111118;padding:2px 6px;border-radius:3px;">cd Plugins/ClaudeProMCP/Resources/UE4-Claude-mcp &amp;&amp; npm install</code> &nbsp;│&nbsp;
   4. Enter API key in plugin Settings &nbsp;│&nbsp;
   5. <strong>Tools → ClaudeProMCP</strong>
   &nbsp;&nbsp;<a href="#installation" style="color:#5ba8ff;margin-left:10px;">Full guide ↓</a>
@@ -274,7 +274,7 @@
         </div>
 
         <div class="tech-label">Documentation</div>
-        <div class="tech-value"><code>Plugins/ClaudeProMCP/FAB_Documentation.html</code><br><a href="https://github.com/Alpha-xp5-ai">github.com/Alpha-xp5-ai</a></div>
+        <div class="tech-value"><a href="https://alpha-xp5-ai.github.io/MCP/ClaudeProMCP/FAB_Documentation.html">alpha-xp5-ai.github.io/MCP/ClaudeProMCP/FAB_Documentation.html</a></div>
 
         <div class="tech-label">Example Project</div>
         <div class="tech-value">Contact us on <a href="https://discord.gg/Cgaa9CdtyF">Discord</a> for a sample project download link.</div>
@@ -285,7 +285,7 @@
         <strong>External Dependencies — Required Before First Use</strong>
         This plugin requires <strong>Node.js v18+</strong> and the <strong>Claude CLI</strong> (<code>npm install -g @anthropic-ai/claude-code</code>) installed on the development machine. An <strong>Anthropic API key</strong> is required — enter it once in the plugin Settings panel.<br><br>
         <strong>After installing the plugin, run once:</strong><br>
-        <code>cd Plugins/ClaudeProMCP/Resources/mcp-bridge &amp;&amp; npm install</code><br><br>
+        <code>cd Plugins/ClaudeProMCP/Resources/UE4-Claude-mcp &amp;&amp; npm install</code><br><br>
         <em>Note: <code>node_modules</code> is not included in the Fab download (Fab policy prohibits executables). This one-time step installs the MCP bridge dependencies.</em>
       </div>
       <div class="info-box note">
@@ -341,7 +341,7 @@
       <h2>Installation</h2>
       <ol class="steps">
         <li><strong>Copy plugin folder</strong> — Place the <code>ClaudeProMCP</code> folder inside your project's <code>Plugins/</code> directory (create the directory if it doesn't exist).</li>
-        <li><strong>Install Node dependencies</strong> — Open a terminal in <code>Plugins/ClaudeProMCP/Resources/mcp-bridge/</code> and run:
+        <li><strong>Install Node dependencies</strong> — Open a terminal in <code>Plugins/ClaudeProMCP/Resources/UE4-Claude-mcp/</code> and run:
           <pre><code>npm install</code></pre>
         </li>
         <li><strong>Install Claude CLI</strong> — If not already installed:
@@ -598,7 +598,7 @@
     <!-- MCP SERVER -->
     <section id="mcp-server">
       <h2>MCP Server Architecture</h2>
-      <p>The plugin runs a lightweight HTTP server inside the editor process on <code>http://localhost:3000</code>. The Claude CLI connects to it through a Node.js MCP stdio bridge (<code>Resources/mcp-bridge/index.js</code>).</p>
+      <p>The plugin runs a lightweight HTTP server inside the editor process on <code>http://localhost:3000</code>. The Claude CLI connects to it through a Node.js MCP stdio bridge (<code>Resources/UE4-Claude-mcp/index.js</code>).</p>
       <h3>Endpoints</h3>
       <table class="tool-table">
         <thead><tr><th>Method</th><th>Path</th><th>Description</th></tr></thead>
@@ -612,7 +612,7 @@
       <p>On each send, the plugin writes a temporary config to <code>Saved/ClaudeProMCP/mcp-config.json</code> pointing to the bridge at its absolute install path, then passes <code>--mcp-config</code> to the Claude CLI. No manual <code>claude mcp add</code> step is needed.</p>
       <div class="info-box warn">
         <strong>Important</strong>
-        The MCP bridge requires <code>node_modules</code> to be installed. If you see "MCP bridge not found" errors, run <code>npm install</code> in <code>Plugins/ClaudeProMCP/Resources/mcp-bridge/</code>.
+        The MCP bridge requires <code>node_modules</code> to be installed. If you see "MCP bridge not found" errors, run <code>npm install</code> in <code>Plugins/ClaudeProMCP/Resources/UE4-Claude-mcp/</code>.
       </div>
     </section>
 
@@ -623,7 +623,7 @@
       <h3>MCP server not connecting / tools not available</h3>
       <ol>
         <li>Make sure the Unreal Editor is open with the plugin loaded (check the Output Log for <em>"MCP Server started on http://localhost:3000"</em>).</li>
-        <li>Run <code>npm install</code> in <code>Plugins/ClaudeProMCP/Resources/mcp-bridge/</code> if not already done.</li>
+        <li>Run <code>npm install</code> in <code>Plugins/ClaudeProMCP/Resources/UE4-Claude-mcp/</code> if not already done.</li>
         <li>Visit <code>http://localhost:3000/mcp/status</code> in a browser. If it responds, the server is running.</li>
         <li>Check <em>Output Log → LogClaudeProMCP</em> for <em>"MCP config written to:"</em> — if missing, the bridge path wasn't found.</li>
       </ol>
