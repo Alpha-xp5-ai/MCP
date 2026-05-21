@@ -11,7 +11,7 @@
 [![Node](https://img.shields.io/badge/Node.js-v18%2B-brightgreen?style=flat-square&logo=node.js)](https://nodejs.org)
 [![Discord](https://img.shields.io/badge/Discord-Join-7289da?style=flat-square&logo=discord)](https://discord.gg/Cgaa9CdtyF)
 
-[📖 Documentation](https://alpha-xp5-ai.github.io/MCP/ClaudeProMCP/FAB_Documentation.html) · [🛒 Fab Marketplace](https://www.fab.com/listings/18d60083-a11a-45ee-a193-edc352d45cbd) · [💬 Discord](https://discord.gg/Cgaa9CdtyF) · [▶ YouTube](https://www.youtube.com/@alpha_xp0)
+[📖 Documentation](https://alpha-xp5-ai.github.io/MCP/ClaudeProMCP/FAB_Documentation.html) · [🛒 Fab Marketplace](https://www.fab.com/sellers/Alpha-XP) · [💬 Discord](https://discord.gg/Cgaa9CdtyF) · [▶ YouTube](https://www.youtube.com/@alpha_xp0)
 
 </div>
 
